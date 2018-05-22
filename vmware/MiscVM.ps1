@@ -26,3 +26,8 @@ Get-vmhost -Name $Host1 |
 #Get total disk space usage in GB of all powered on VMs.
 # See https://isjw.uk/using-powercli-to-measure-vm-disk-space-usage/
 [math]::Round(((get-vm | Where-object{$_.PowerState -eq "PoweredOn" }).UsedSpaceGB | measure-Object -Sum).Sum)
+
+#List all running VM tasks on vCenter
+Get-Task |
+  Where-Object {$_.State -eq "running" -and $_.objectid -like "VirtualMachine*"} | 
+  Select-Object  @{Name="VM Name";Expression={(Get-VM -ID $_.ObjectID).Name}}, Name, StartTime, PercentComplete
