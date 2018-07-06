@@ -31,3 +31,7 @@ Get-vmhost -Name $Host1 |
 Get-Task |
   Where-Object {$_.State -eq "running" -and $_.objectid -like "VirtualMachine*"} | 
   Select-Object  @{Name="VM Name";Expression={(Get-VM -ID $_.ObjectID).Name}}, Name, StartTime, PercentComplete
+
+#List all hosts along with the DELL Service Tag.
+Get-View -ViewType HostSystem |
+  Select Name,@{N="Tag";E={$_.Summary.Hardware.OtherIdentifyingInfo[1].IdentifierValue}}
