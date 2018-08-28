@@ -34,4 +34,4 @@ Get-Task |
 
 #List all hosts along with the DELL Service Tag.
 Get-View -ViewType HostSystem |
-  Select Name,@{N="Tag";E={$_.Summary.Hardware.OtherIdentifyingInfo[1].IdentifierValue}}
+  Select-Object Name,@{N="Tag";E={$_.Summary.Hardware.OtherIdentifyingInfo[1].IdentifierValue}}
