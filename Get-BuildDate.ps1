@@ -8,6 +8,7 @@
 # ("WS40200","WS46000") | Get-BuildDate
 # Get-BuildDate ("WS40200","WS46000")
 # $Computers=((12300..12399) | ForEach-Object{ "WS$_"}) | Get-BuildDate
+# See https://isjw.uk/remote-win-install-date-powershell/ for more details
 
 function Get-BuildDate {
     param(
