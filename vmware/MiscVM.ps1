@@ -35,3 +35,12 @@ Get-Task |
 #List all hosts along with the DELL Service Tag.
 Get-View -ViewType HostSystem |
   Select-Object Name,@{N="Tag";E={$_.Summary.Hardware.OtherIdentifyingInfo[1].IdentifierValue}}
+
+#What VM Hardware versions exist in your virtual environment?
+#See https://isjw.uk/powercli-vm-hardware-versions/
+#Using the “Group-Object” cmdlet we can run up a quick count of all the VMs on each hardware version
+Get-VM | Group-Object Version
+#This can be refined using “Sort-Object” to put the most common hardware version at the top of the list.
+Get-VM  | Group-Object Version | Sort-Object Count -Descending
+#Use “Where-Object” can be used to filter to only Powered On VMs..
+Get-VM  | Where-Object {$_.PowerState -eq "PoweredOn"} | Group-Object Version | Sort-Object Count -Descending
