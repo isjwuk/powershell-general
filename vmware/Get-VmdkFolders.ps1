@@ -23,7 +23,7 @@
 	  #Enumerate all the vmdk files on the datastore
 	  $VMDKs= get-childitem -Path $TempDriveName -Recurse -Filter "*.vmdk"
 	  #Get a list of all the unique folder paths containing VMDKs
-	  $FolderPaths= $VMDKs | select FolderPath | Sort-Object FolderPath | Get-Unique -AsString
+	  $FolderPaths= $VMDKs | Select-Object FolderPath | Sort-Object FolderPath | Get-Unique -AsString
 	  #Remove the Drive Notation from the drive Name
 	  $TempDriveName=$TempDriveName -replace "\:\\",""
 	  #Tidy up the datastore mapping

@@ -6,6 +6,11 @@
 
 #Example Usage
 # ("WS40200","WS46000") | Get-BuildDate
+# Computer BuildDate           DaysSinceLastBuild
+# -------- ---------           ------------------
+# WS40200
+# WS46000  17/07/2018 20:20:39 55
+#
 # Get-BuildDate ("WS40200","WS46000")
 # $Computers=((12300..12399) | ForEach-Object{ "WS$_"}) | Get-BuildDate
 
