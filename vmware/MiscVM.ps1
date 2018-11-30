@@ -44,3 +44,11 @@ Get-VM | Group-Object Version
 Get-VM  | Group-Object Version | Sort-Object Count -Descending
 #Use “Where-Object” can be used to filter to only Powered On VMs..
 Get-VM  | Where-Object {$_.PowerState -eq "PoweredOn"} | Group-Object Version | Sort-Object Count -Descending
+
+#Which VMs haven't been backed up recently?
+# Using a Commvault setup which takes backups of all VMs that are NOT tagged "NoBackup" and which sets the VM
+# Custom Attribute "Last Backup" to the date of the last backup. This snippet lists all VMs with no "Last Backup"
+# date, or one which is over 7 days ago.
+Get-VM  | Where-Object {($_.PowerState -eq "PoweredOn") -and (($_.CustomFields["Last Backup"] -eq "" ) `
+          -or ((Get-Date($_.CustomFields["Last Backup"])) -lt (Get-Date).AddDays(-7))) `
+            -and (($_ | Get-TagAssignment | Where-Object {$_.Tag.Name -eq "NoBackup"}| Measure-Object).Count -eq 0 )}
