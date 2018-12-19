@@ -52,3 +52,6 @@ Get-VM  | Where-Object {$_.PowerState -eq "PoweredOn"} | Group-Object Version | 
 Get-VM  | Where-Object {($_.PowerState -eq "PoweredOn") -and (($_.CustomFields["Last Backup"] -eq "" ) `
           -or ((Get-Date($_.CustomFields["Last Backup"])) -lt (Get-Date).AddDays(-7))) `
             -and (($_ | Get-TagAssignment | Where-Object {$_.Tag.Name -eq "NoBackup"}| Measure-Object).Count -eq 0 )}
+
+#List running VM Migration Tasks
+Get-Task | Where-Object{$_.Name -eq "RelocateVM_Task"} | Select-Object @{Name="VM";Expression={Get-VM -Id $_.ObjectID}}, State, @{Name="% Complete";Expression={$_.PercentComplete}},StartTime
