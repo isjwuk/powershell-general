@@ -13,9 +13,6 @@ OS Version: Windows 10
 #>
 
 Function Get-E1000NICs {
-    Get-VM(get-vm |
-        Where-Object {$_.PowerState -eq "PoweredOn"} |
-        Get-NetworkAdapter |
-        Where-Object {$_.Type -like "e1000*"} |
-        Select-Object Parent ).Parent
+    Get-VM | 
+    Where-Object {$_.PowerState -eq "PoweredOn" -and ($_ | Get-NetworkAdapter).Type -like "e1000*"}
 }
