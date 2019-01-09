@@ -1,5 +1,6 @@
 #Upgrade VM Hardware on all VMs tagged "UpgradeMe"
 #Code from London VMUG Presentation January 2017
+#VMworld 2018 Presentation here- https://youtu.be/NLFip5dOUjg 
 $AllMyVMs = Get-VM
 ForEach ($VM in $AllMyVMs) {
 	$Tags= $VM | Get-TagAssigment | Select Tag
