@@ -1,4 +1,3 @@
-#Update the Library Loan Stats
 <#
 Script name:    lapsafe-api-examples.ps1
 Created on:     05/02/2019
