@@ -11,8 +11,8 @@ OS Version: Windows 10
 #>
 
 #Complete these two fields using your own API details from LapSafe
-$apikey="xxxxx"           #API Key
 $resource="https://xxxxx" #URL
+$apikey="xxxxx"           #API Key
 
 #Retrieve the JSON for the dashboard
 $JSON=Invoke-RestMethod -Method Get -Uri $resource -Header @{ "apikey" = $apiKey }
