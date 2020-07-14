@@ -1,0 +1,14 @@
+#Import the CSV
+$events=Import-CSV securitylog.csv
+
+#For each event in the log read the description,
+# strip out all but the Account Name
+# and ignore Anonymous, System, and Computer accounts
+$result= foreach ($event in $events) {
+        (((($event.Description) -Split "`r`n" |
+        Where-Object {$_ -like '*Account Name:*'}) -Split ":")[1]).trim() |
+        Where-Object {$_ -ne "-" -and $_ -ne "ANONYMOUS LOGON" -and $_ -ne "SYSTEM" -and $_ -notlike "*$" } 
+        }
+
+#Sort the result so we only see one of each account name.
+$result | Sort-Object -Unique
