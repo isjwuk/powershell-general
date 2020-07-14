@@ -10,3 +10,5 @@ This snippet takes the export of the Windows Security log and returns a list of 
 ![Notepad](images/Notepad.png)
 
 Now the PowerShell [Get-UserNamesFromSecurityLog](./Get-UserNamesFromSecurityLog.ps1) can be used on the resulting file.
+
+[More Information on IT Should Just Work](https://isjw.uk/powershell-usernames-from-log/)
